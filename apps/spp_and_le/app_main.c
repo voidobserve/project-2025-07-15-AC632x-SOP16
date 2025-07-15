@@ -354,6 +354,7 @@ __initcall(user_timer_init);
 #include "hardware.h"
 
 
+// 用户任务
 void main_while(void)
 {
 
@@ -374,7 +375,7 @@ void main_while(void)
 }
 
 
-
+// 用户主函数
 void my_main(void)
 {
 

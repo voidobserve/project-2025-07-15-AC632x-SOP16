@@ -27,7 +27,7 @@ void fc_data_init(void)
 
 //灯具
     fc_effect.on_off_flag = DEVICE_ON;  //灯为开启状态
-    fc_effect.led_num = 13;        //灯带的总灯珠数量
+    fc_effect.led_num = 15 + 1;        //灯带的总灯珠数量
     fc_effect.Now_state = IS_STATIC;  //当前运行状态 静态
     fc_effect.rgb.r = 0;
     fc_effect.rgb.g = 0;

@@ -114,6 +114,7 @@ void ws281x_show(unsigned char *pixels_pattern, unsigned short pattern_size)
 
         j=0;
 
+        // 要拆开来存放，否则会直接亮多个灯
         *(buf + rOffset + (i-3)) = r;
         *(buf + gOffset + (i-3)) = g;
         *(buf + bOffset + (i-3)) = b;
