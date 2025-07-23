@@ -103,7 +103,7 @@
 #define CONFIG_BT_GATT_COMMON_ENABLE       1
 #define CONFIG_BT_SM_SUPPORT_ENABLE        0
 #define CONFIG_BT_GATT_CLIENT_NUM          1 //range(0~7)
-#define CONFIG_BT_GATT_SERVER_NUM          1 //range(0~1)
+#define CONFIG_BT_GATT_SERVER_NUM          0 //range(0~1)
 #define CONFIG_BT_GATT_CONNECTION_NUM      (CONFIG_BT_GATT_SERVER_NUM + CONFIG_BT_GATT_CLIENT_NUM) //range(0~8)
 #define CONFIG_BLE_HIGH_SPEED              0 //BLE提速模式: 使能DLE+2M, payload要匹配pdu的包长
 

@@ -1,0 +1,12 @@
+{
+    "files.associations": {
+        "mcpwm.h": "c",
+        "btctrler_task.h": "c",
+        "app_power_manage.h": "c",
+        "board_ac632n_demo_cfg.h": "c",
+        "led_strip_sys.h": "c",
+        "app_config.h": "c",
+        "rf433_key.h": "c",
+        "rf_433_key.h": "c"
+    }
+}

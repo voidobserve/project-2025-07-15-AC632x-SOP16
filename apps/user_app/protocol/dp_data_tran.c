@@ -11,6 +11,9 @@
 #include "btstack/le/ble_api.h"
 #include "led_strip_drive.h"
 #include "one_wire.h"
+
+
+
 dp_data_header_t  dp_data_header;  //涂鸦DP数据头
 dp_switch_led_t   dp_switch_led;   //DPID_SWITCH_LED开关
 dp_work_mode_t    dp_work_mode;    //DPID_WORK_MODE工作模式
@@ -238,8 +241,10 @@ unsigned short dp_extract_data_handle(unsigned char *buff)
 }
 
 u8 Ble_Addr[6]; //蓝牙地址
-extern hci_con_handle_t ZD_HCI_handle;
 
+#if CONFIG_BT_GATT_SERVER_NUM
+extern hci_con_handle_t ZD_HCI_handle;
+#endif  
 
 extern ALARM_CLOCK alarm_clock[3];
 extern TIME_CLOCK time_clock;
@@ -257,7 +262,10 @@ void zd_fb_2_app(u8 *p, u8 len)
     uint8_t fc_buffer[20];            //发送缓存
     memcpy(fc_buffer,Ble_Addr, 6);
     memcpy(fc_buffer+6, p, len);
+    
+#if CONFIG_BT_GATT_SERVER_NUM
     ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, fc_buffer, len+6, ATT_OP_AUTO_READ_CCC);
+    #endif
 }
 
 
@@ -447,27 +455,35 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[7] = 0x01;
         Send_buffer[8] = 0x01;
         Send_buffer[9] = 0x02;  //灯具类型：RGBW
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 10, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
         //-------------------发送开关机状态---------------------------
         Send_buffer[6] = 0x01;
         Send_buffer[7] = 0x01;
         Send_buffer[8] = get_on_off_state(); // 目前状态
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送亮度---------------------------
         Send_buffer[6] = 0x04;
         Send_buffer[7] = 0x03;
         Send_buffer[8] = fc_effect.app_b;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送速度---------------------------
         Send_buffer[6] = 0x04;
         Send_buffer[7] = 0x04;
         Send_buffer[8] = fc_effect.app_speed;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送灯带长度---------------------------
@@ -475,14 +491,18 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[7] = 0x08;
         Send_buffer[8] = fc_effect.led_num>>8;
         Send_buffer[9] = fc_effect.led_num&0xff;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 10, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
        //-------------------发送灵敏度---------------------------
         Send_buffer[6] = 0x2F;
         Send_buffer[7] = 0x05;
         Send_buffer[8] = fc_effect.music.s;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送静态RGB模式--------------------------
@@ -492,7 +512,9 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[9] = fc_effect.rgb.r;
         Send_buffer[10] = fc_effect.rgb.g;
         Send_buffer[11] = fc_effect.rgb.b;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 12, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送闹钟1定时数据--------------------------
@@ -502,7 +524,9 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[9] = alarm_clock[0].minute;
         Send_buffer[10] = alarm_clock[0].on_off;
         Send_buffer[11] = alarm_clock[0].mode;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 12, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送闹钟2定时数据--------------------------
@@ -512,7 +536,9 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[9] = alarm_clock[1].minute;
         Send_buffer[10] = alarm_clock[1].on_off;
         Send_buffer[11] = alarm_clock[1].mode;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 12, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送闹钟3定时数据--------------------------
@@ -522,27 +548,35 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[9] = alarm_clock[2].minute;
         Send_buffer[10] = alarm_clock[2].on_off;
         Send_buffer[11] = alarm_clock[2].mode;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 12, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------发送RGB接口模式--------------------------
         Send_buffer[6] = 0x04;
         Send_buffer[7] = 0x05;
         Send_buffer[8] = fc_effect.sequence;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
         //-------------------声控模式（手机麦或外麦--------------------------
         Send_buffer[6] = 0x06;
         Send_buffer[7] = 0x07;
         Send_buffer[8] = fc_effect.music.m_type;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
         //-------------------本地麦克风模式--------------------------
         Send_buffer[6] = 0x06;
         Send_buffer[7] = 0x06;
         Send_buffer[8] = fc_effect.music.m ;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 //流星
 
@@ -550,19 +584,25 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[6] = 0x2F;
         Send_buffer[7] = 0x02;
         Send_buffer[8] = fc_effect.star_on_off;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
         //-------------------流星速度--------------------------
         Send_buffer[6] = 0x2F;
         Send_buffer[7] = 0x01;
         Send_buffer[8] = fc_effect.app_star_speed ;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
         //-------------------流星周期--------------------------
         Send_buffer[6] = 0x2F;
         Send_buffer[7] = 0x03;
         Send_buffer[8] = fc_effect.meteor_period;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
 
@@ -572,7 +612,9 @@ void parse_zd_data(unsigned char *LedCommand)
         Send_buffer[6] = 0x2F;
         Send_buffer[7] = 0x07;
         Send_buffer[8] = fc_effect.base_ins.period;
+        #if CONFIG_BT_GATT_SERVER_NUM
         ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+        #endif
         os_time_dly(1);
 
 
@@ -591,7 +633,9 @@ void parse_zd_data(unsigned char *LedCommand)
             Send_buffer[6] = 0x01;
             Send_buffer[7] = 0x01;
             Send_buffer[8] = LedCommand[2];
+            #if CONFIG_BT_GATT_SERVER_NUM
             ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+            #endif
 
         }
         //---------------------------------接收到设备时间数据，无需返回应答-----------------------------------
@@ -615,7 +659,9 @@ void parse_zd_data(unsigned char *LedCommand)
             Send_buffer[9] = LedCommand[3];
             Send_buffer[10] = LedCommand[4];
             Send_buffer[11] = LedCommand[5];
+            #if CONFIG_BT_GATT_SERVER_NUM
             ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 12, ATT_OP_AUTO_READ_CCC);
+            #endif
 
 
             if(LedCommand[1]==0x00)
@@ -782,7 +828,9 @@ phone_music_soure = 1;
                     Send_buffer[6] = 0x06;
                     Send_buffer[7] = 0x06;
                     Send_buffer[8] = LedCommand[2];
+                    #if CONFIG_BT_GATT_SERVER_NUM
                     ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+                    #endif
                 }
 phone_music_soure = 1;
             }
@@ -795,7 +843,9 @@ phone_music_soure = 1;
                 Send_buffer[6] = 0x06;
                 Send_buffer[7] = 0x07;
                 Send_buffer[8] = LedCommand[2];
+                #if CONFIG_BT_GATT_SERVER_NUM
                 ble_comm_att_send_data(ZD_HCI_handle, ATT_CHARACTERISTIC_fff1_01_VALUE_HANDLE, Send_buffer, 9, ATT_OP_AUTO_READ_CCC);
+                #endif
             }
 
             //---------------------------------设置麦克风灵，电机，流星敏度-----------------------------------
