@@ -1,3 +1,4 @@
+// encoding UTF-8
 #include "system/app_core.h"
 #include "system/includes.h"
 

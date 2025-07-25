@@ -75,5 +75,64 @@ objs/apps/common/device/key/key_driver.c.o: \
   ../../../../include_lib/system/device\rdec_key.h \
   ../../../../include_lib/driver/cpu/bd19\asm/rdec.h \
   ../../../../include_lib/system/device\tent600_key.h \
+  ../../../../apps/user_app/rf_433_key\rf_433_key.h \
+  ../../../../include_lib/system\includes.h \
+  ../../../../include_lib/system/spinlock.h \
+  ../../../../include_lib/system/task.h \
+  ../../../../include_lib/system/os/os_api.h \
+  ../../../../include_lib/system\os/os_cpu.h \
+  ../../../../include_lib/system/generic\jiffies.h \
+  ../../../../include_lib/system\os/os_error.h \
+  ../../../../include_lib/system\os/os_type.h \
+  ../../../../include_lib/system/os/FreeRTOS/FreeRTOS.h \
+  ../../../../include_lib/system/os/FreeRTOS/FreeRTOSConfig.h \
+  ../../../../include_lib/system/os/FreeRTOS/q32s/portmacro.h \
+  C:/JL/pi32/q32s-include\stdint.h C:/JL/pi32/q32s-include\sys/_intsup.h \
+  ../../../../include_lib/system/os/FreeRTOS/projdefs.h \
+  ../../../../include_lib/system/os/FreeRTOS/portable.h \
+  ../../../../include_lib/system/os/FreeRTOS/deprecated_definitions.h \
+  ../../../../include_lib/system/os/FreeRTOS/mpu_wrappers.h \
+  ../../../../include_lib/system/os/FreeRTOS/semphr.h \
+  ../../../../include_lib/system/os/FreeRTOS/queue.h \
+  ../../../../include_lib/system/os/FreeRTOS/task.h \
+  ../../../../include_lib/system/os/FreeRTOS/list.h \
+  ../../../../include_lib/system/wait.h \
+  ../../../../include_lib/system/app_core.h \
+  ../../../../include_lib/system/app_msg.h \
+  ../../../../include_lib/system/database.h \
+  ../../../../include_lib/system/fs/fs.h \
+  ../../../../include_lib/system\generic/ioctl.h \
+  ../../../../include_lib\system/sys_time.h \
+  ../../../../include_lib/system/fs/fs_file_name.h \
+  ../../../../include_lib/system/fs/sdfile.h \
+  ../../../../include_lib/system/power_manage.h \
+  ../../../../include_lib/system/syscfg_id.h \
+  ../../../../include_lib/system/bank_switch.h \
+  ../../../../include_lib/system/generic/includes.h \
+  ../../../../include_lib/system/generic/ascii.h \
+  ../../../../include_lib/system/generic/gpio.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/gpio.h \
+  ../../../../include_lib/system/generic/version.h \
+  ../../../../include_lib/system/generic/lbuf.h \
+  ../../../../include_lib/system/generic/lbuf_lite.h \
+  ../../../../include_lib/system/generic/circular_buf.h \
+  ../../../../include_lib/system/generic/index.h \
+  ../../../../include_lib/system/generic/debug_lite.h \
+  ../../../../include_lib/system/device/includes.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/includes.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/crc16.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/clock.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/clock_hw.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/uart.h \
+  ../../../../include_lib/driver\device/uart.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/uart_dev.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/spiflash.h \
+  ../../../../include_lib/driver\device/spiflash.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/efuse.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/wdt.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/debug.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/rtc.h \
+  ../../../../include_lib/driver/cpu/bd19\asm/mcpwm.h \
+  ../../../../include_lib/driver\device/sdio_host_init.h \
   ../../../../include_lib/system\debug.h \
   ../../../../apps/user_app/rf24g_key\rf24g_app.h

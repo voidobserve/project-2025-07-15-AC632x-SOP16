@@ -91,11 +91,14 @@ objs/apps/common/device/key/key_driver.c.o
 -r=objs/apps/common/device/key/key_driver.c.o,usr_timer_add,l
 -r=objs/apps/common/device/key/key_driver.c.o,RF24G_Key_Handle,l
 -r=objs/apps/common/device/key/key_driver.c.o,RF24G_Key_Long_Scan,l
+-r=objs/apps/common/device/key/key_driver.c.o,sys_timer_add,l
+-r=objs/apps/common/device/key/key_driver.c.o,rf_433_key_event_handle,l
 -r=objs/apps/common/device/key/key_driver.c.o,adkey_init,l
 -r=objs/apps/common/device/key/key_driver.c.o,timer_get_ms,l
 -r=objs/apps/common/device/key/key_driver.c.o,sys_event_notify,l
 -r=objs/apps/common/device/key/key_driver.c.o,rf24g_scan_para,l
 -r=objs/apps/common/device/key/key_driver.c.o,is_rf24g_,l
+-r=objs/apps/common/device/key/key_driver.c.o,rf_433_key_structure,l
 -r=objs/apps/common/device/key/key_driver.c.o,adkey_data,l
 -r=objs/apps/common/device/key/key_driver.c.o,adkey_scan_para,l
 -r=objs/apps/common/device/key/key_driver.c.o,key_lp_target,pl
@@ -3360,8 +3363,12 @@ objs/apps/user_app/rf_433_key/rf_433_key.c.o
 -r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,gpio_set_pull_down,l
 -r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,gpio_set_die,l
 -r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,gpio_set_direction,l
+-r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,rf_433_key_event_handle,pl
+-r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,printf,l
 -r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,rf_433_data,pl
 -r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,flag_is_recved_rf_433_data,pl
+-r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,rf_433_key_event_table,pl
+-r=objs/apps/user_app/rf_433_key/rf_433_key.c.o,rf_433_key_structure,pl
 ../../../../cpu/bd19/liba/cpu.a.llvm.14896.crc16.c
 -r=../../../../cpu/bd19/liba/cpu.a.llvm.14896.crc16.c,__crc16_mutex_init,pl
 -r=../../../../cpu/bd19/liba/cpu.a.llvm.14896.crc16.c,os_mutex_create,
